@@ -54,7 +54,8 @@ pipeline {
 					input 'Accept deployment?'
 					//sh 'docker stop $(docker ps -aq)'
 					sh 'docker stop movieApiNew'
-					sh 'docker stop movieApi'
+					sh 'if [ "$(docker ps -f name=movieApi" != "" ]; then docker stop movieApi; fi'
+                    //sh 'docker stop movieApi'
 					sh 'docker rm movieApi'
 					sh 'docker run --name movieApi -d -p 3000:3000 cristiancristancho/rampup_back:latest'
                                  					
