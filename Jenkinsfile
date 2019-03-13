@@ -35,7 +35,7 @@ pipeline {
 
 				}
 			}
-			stage('Check') {                         
+			/* stage('Check') {                         
 				steps {                                 
 					echo 'Look the new version on port 4000....'  
 					input 'check new version?'
@@ -47,19 +47,20 @@ pipeline {
 					sh 'docker run --rm --name movieApiNew -d -p 4000:3000 cristiancristancho/rampup_back:${BUILD_NUMBER}'  
                                  					
 				}                 
-			}                  
-			stage('Deploy') {                         
+			} */
+
+			/* stage('Deploy') {                         
 				steps {                                 
 					echo 'Deploying....'  
 					input 'Accept deployment?'
 					//sh 'docker stop $(docker ps -aq)'
 					sh 'docker stop movieApiNew'
-					sh 'if [ "$(docker ps -f name=movieApi" != "" ]; then docker stop movieApi; fi'
+					sh 'if [ "$(docker ps -f name=movieApi" != " " ]; then docker stop movieApi; fi'
                     //sh 'docker stop movieApi'
 					sh 'docker rm movieApi'
 					sh 'docker run --name movieApi -d -p 3000:3000 cristiancristancho/rampup_back:latest'
                                  					
 				}                 
-			}         
+			} */         
 		} 
 } 
