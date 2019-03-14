@@ -61,7 +61,7 @@ pipeline {
 					//sh 'ssh -i cccc.pem ubuntu@172.23.6.170'
 					//sh 'if [ "$(docker service ps -q movieAPI)" != "" ]; then docker service create --replicas 1 -p 3000:3000 --constraint node.hostname==ip-172-23-9-232 --name movieAPI cristiancristancho/rampup_back:latest; else docker service update --replicas 1 -p 3000:3000 --constraint node.hostname==ip-172-23-9-232 --name movieAPI cristiancristancho/rampup_back:latest; fi'
 					sh 	'''
-							ssh -i /var/lib/jenkins/cccc.pem ubuntu@172.23.6.170 "if [ "$(docker service ps -q movieAPI)" != "no such service: movieAPI" ]; then docker service create --replicas 1 -p 3000:3000 --constraint node.hostname==ip-172-23-9-232 --name movieAPI cristiancristancho/rampup_back:${BUILD_NUMBER}; else docker service update --image cristiancristancho/rampup_back:${BUILD_NUMBER} movieAPI; fi"
+							ssh -v -i /var/lib/jenkins/cccc.pem ubuntu@172.23.6.170 "if [ "$(docker service ps -q movieAPI)" != "no such service: movieAPI" ]; then docker service create --replicas 1 -p 3000:3000 --constraint node.hostname==ip-172-23-9-232 --name movieAPI cristiancristancho/rampup_back:${BUILD_NUMBER}; else docker service update --image cristiancristancho/rampup_back:${BUILD_NUMBER} movieAPI; fi"
 						'''
 					// sh 'docker service update --replicas 1 -p 3000:3000 --name movieAPI cristiancristancho/rampup_back:latest'
 				}                 
