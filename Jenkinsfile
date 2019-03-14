@@ -58,9 +58,9 @@ pipeline {
 					// sh 'docker stop challjenk'
 					// sh 'docker rm challjenk'
 					// sh 'docker run --name challjenk -d -p 8000:3030 cristiancristancho/rampup_front:latest'
-					sh 'ssh -i cccc.pem ubuntu@172.23.9.0/24'
-					sh 'if [ "$(docker service ps -q movieAPI)" != " " ]; then docker service create --replicas 2 -p 3000:3000 --name movieAPI cristiancristancho/rampup_back:latest; fi'
-					sh 'docker service update --replicas 2 -p 3000:3000 --name movieAPI cristiancristancho/rampup_back:latest'
+					sh 'ssh -i cccc.pem ubuntu@172.23.6.170'
+					sh 'if [ "$(docker service ps -q movieAPI)" != "" ]; then docker service create --replicas 1 -p 3000:3000 --constraint node.hostname==ip-172-23-9-232 --name movieAPI cristiancristancho/rampup_back:latest; else docker service update --replicas 1 -p 3000:3000 --constraint node.hostname==ip-172-23-9-232 --name movieAPI cristiancristancho/rampup_back:latest; fi'
+					// sh 'docker service update --replicas 1 -p 3000:3000 --name movieAPI cristiancristancho/rampup_back:latest'
 				}                 
 			}         
 		} 

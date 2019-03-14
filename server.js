@@ -5,10 +5,10 @@ const mysql = require('mysql')
 const util = require('util')
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'applicationuser',
-  password: process.env.DB_PASS || 'applicationuser',
-  database: process.env.DB_NAME || 'movie_db'
+  host: process.env.DB_HOST || 'dbrampup.clfovylkpd95.us-east-1.rds.amazonaws.com',
+  user: process.env.DB_USER || 'ccristancho',
+  password: process.env.DB_PASS || '123456789',
+  database: process.env.DB_NAME || 'dbback'
 })
 pool.query = util.promisify(pool.query)
 
