@@ -49,18 +49,19 @@ pipeline {
 				}                 
 			} */
 
-			/* stage('Deploy') {                         
+			stage('Deploy') {                         
 				steps {                                 
 					echo 'Deploying....'  
 					input 'Accept deployment?'
 					//sh 'docker stop $(docker ps -aq)'
-					sh 'docker stop movieApiNew'
-					sh 'if [ "$(docker ps -f name=movieApi" != " " ]; then docker stop movieApi; fi'
-                    //sh 'docker stop movieApi'
-					sh 'docker rm movieApi'
-					sh 'docker run --name movieApi -d -p 3000:3000 cristiancristancho/rampup_back:latest'
-                                 					
+					// sh 'docker stop challjenkNew'
+					// sh 'docker stop challjenk'
+					// sh 'docker rm challjenk'
+					// sh 'docker run --name challjenk -d -p 8000:3030 cristiancristancho/rampup_front:latest'
+					sh 'ssh -i cccc.pem ubuntu@172.23.9.0/24'
+					sh 'if [ "$(docker service ps -q movieAPI)" != " " ]; then docker service create --replicas 2 -p 3000:3000 --name movieAPI cristiancristancho/rampup_back:latest; fi'
+					sh 'docker service update --replicas 2 -p 3000:3000 --name movieAPI cristiancristancho/rampup_back:latest'
 				}                 
-			} */         
+			}         
 		} 
 } 
